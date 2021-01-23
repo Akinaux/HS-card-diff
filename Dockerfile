@@ -1,5 +1,6 @@
-FROM centos:latest
+FROM ubuntu:18.04
 
-RUN yum install -y jq wget diffutils git && \
+RUN apt update && \
+apt-get install -y curl git diffutils wget jq && \
 mkdir /Hearthstone && \
 git clone https://github.com/Akinaux/HS-card-diff.git /Hearthstone
