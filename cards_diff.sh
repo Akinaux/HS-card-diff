@@ -114,9 +114,15 @@ do
             if [[ -z ${Old_data} ]] && [[ $Diff_only != "True" ]]
             then
                 Count_add=$[Count_add + 1]
-                echo "########################################"
+                if [[ $New_only != "True" ]]
+                then
+                    echo "########################################"
+                fi
                 echo "${New_data}"
-                echo "New entry"
+                if [[ $New_only != "True" ]]
+                then
+                    echo "New entry"
+                fi
             else
                 if [[ ! -z ${Old_data} ]] && [[ $New_only != "True" ]]
                 then
@@ -130,7 +136,10 @@ do
         fi
         Count=$[Count + 1]
         # Display a status
-        echo -ne "Items analyzed: ${Count}/${NB_IDs} ($[Count * 100 / $NB_IDs]%) \033[0K\r" >&2
+        if [[ $New_only != "True" ]]
+        then
+            echo -ne "Items analyzed: ${Count}/${NB_IDs} ($[Count * 100 / $NB_IDs]%) \033[0K\r" >&2
+        fi
     done
 done
 # Display a summary
